@@ -1,0 +1,30 @@
+{
+  "name": "streamhub",
+  "version": "1.0.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "preinstall": "npx only-allow pnpm",
+    "build:shared": "pnpm --filter \"./shared/libraries/*\" run build",
+    "build:services": "pnpm --filter \"./services/*\" run build",
+    "build": "pnpm run build:shared && pnpm run build:services",
+    "dev:user": "pnpm --filter user-management-service run dev",
+    "dev:content": "pnpm --filter content-management-service run dev",
+    "dev:streaming": "pnpm --filter live-streaming-service run dev",
+    "dev": "concurrently \"pnpm dev:user\" \"pnpm dev:content\" \"pnpm dev:streaming\"",
+    "test:shared": "pnpm --filter \"./shared/libraries/*\" run test",
+    "test:services": "pnpm --filter \"./services/*\" run test",
+    "test": "pnpm run test:shared && pnpm run test:services",
+    "docker:up": "docker-compose up -d"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.15.1",
+  
+  "devDependencies": {
+    "only-allow": "^1.1.1",
+    "concurrently": "^8.0.0",
+    "typescript": "^5.0.0"
+  }
+}
